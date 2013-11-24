@@ -1,0 +1,53 @@
+@import url('normalize.css');
+
+* {
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+h1 {
+	font-size: 22px;	
+	margin: 0;
+}
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+#sidebar {
+	width: 252px;
+	float: left;
+	line-height: 10px;
+	margin-top: 8px;
+	margin-left: 8px;
+}
+
+.color {
+	height: 12px;
+	width: 12px;
+	display: inline-block;
+}
+
+#topbar {
+	line-height: 44px;
+	height: 44px;
+	width: 100%;
+	padding: 0 12px;
+	border-bottom: 1px solid #efefef;
+}
+
+.artistic {
+	width: 930px;
+	padding: 8px 0 8px;
+	margin-left: 268px;
+}
+
+#stage {
+	width: 930px;
+	height: 440px;
+	background: black;
+}

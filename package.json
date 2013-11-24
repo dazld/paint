@@ -1,0 +1,28 @@
+{
+  "name": "paint",
+  "version": "0.0.0",
+  "description": "canvas based sketching",
+  "main": "index.js",
+  "scripts": {
+    "build":"browserify -t handlebarsify index.js | uglifyjs --screw-ie8 -o build/index.js --stats",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/dazld/paint.git"
+  },
+  "keywords": [
+    "canvas"
+  ],
+  "author": "Dan Peddle",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dazld/paint/issues"
+  },
+  "dependencies": {
+    "browserify": "~2.35.4",
+    "handlebarsify": "~1.0.4",
+    "handlebars": "~1.1.2",
+    "lodash": "~2.3.0"
+  }
+}
