@@ -4,7 +4,7 @@
   "description": "canvas based sketching",
   "main": "index.js",
   "scripts": {
-    "build":"browserify -t handlebarsify index.js | uglifyjs --screw-ie8 -o build/index.js --stats",
+    "build": "browserify -t handlebarsify index.js | uglifyjs --screw-ie8 -o build/index.js --stats",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,6 +23,7 @@
     "browserify": "~2.35.4",
     "handlebarsify": "~1.0.4",
     "handlebars": "~1.1.2",
-    "lodash": "~2.3.0"
+    "lodash": "~2.3.0",
+    "ddd-jquery": "~0.3.0"
   }
 }

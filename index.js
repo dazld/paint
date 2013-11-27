@@ -10,14 +10,16 @@ var Painter = function Painter (options){
 	// <3 events
 	this.startTime = Date.now();
 	this.bus = bus;
-	
-	this.main = util.toDom(main_tpl());
-	this.sidebar = this.main.querySelector('aside');
-	this.canvas = this.main.querySelector('canvas');
+	this.colors = pantone;
+
+	var main = util.toDom(main_tpl());
+	this.sidebar = main.querySelector('aside');
+	this.canvas = main.querySelector('canvas');
 	this.ctx = this.canvas.getContext('2d');
 
-	this.colors = pantone;
-	document.body.appendChild(this.main);
+	
+	document.body.appendChild(main);
+		
 	
 	this.debug('starting to insert cols');
 	
@@ -29,7 +31,6 @@ var Painter = function Painter (options){
 	},this);
 
 	this.debug('end to insert cols');
-	this.main.appendChild(document.createElement('h1'));
 
 };
 
