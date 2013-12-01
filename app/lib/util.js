@@ -6,20 +6,22 @@ var uniqId = (function() {
 	}
 })();
 
-var rgbToHex = function(){
+var rgbToHex = (function(){
 	
-	var args = [].slice.call(arguments);
 	var toString = Number.prototype.toString;
 
-	var toHex = function(num){
-		
+	var toHex = function toHex (num){	
 		var hexed = toString.call(parseInt(num,10), 16);
 		hexed = hexed.length === 1 ? '0' + hexed : hexed; // zero pad length one numbers
 		return hexed;
+	};
+
+	return function rgbToHex (){
+		var args = [].slice.call(arguments);
+		return "#" + args.map(toHex).join('');
 	}
-	
-	return args.map(toHex).join('');
-};
+
+})();
 
 
 // Helper function to correctly set up the prototype chain, for subclasses.
