@@ -23,6 +23,16 @@ var rgbToHex = (function(){
 
 })();
 
+var sequential = function sequential (operations, timer){
+	if (operations.length) {
+		setTimeout(function(){
+			operations[0]();
+			operations.shift();
+			sequential(operations,timer);
+		}, timer);
+	};
+};
+
 
 // Helper function to correctly set up the prototype chain, for subclasses.
 // Similar to `goog.inherits`, but uses a hash of prototype properties and
@@ -90,5 +100,6 @@ module.exports = {
 	extend: extend,
 	toDom: toDom,
 	uniqId: uniqId,
-	rgbToHex: rgbToHex
+	rgbToHex: rgbToHex,
+	sequential: sequential
 };

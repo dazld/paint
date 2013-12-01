@@ -90,28 +90,67 @@ Painter.prototype.startListening = function() {
 
 Painter.prototype.undo = function undo (replay){
 	
+	var playback = [];
+
 	if (replay !== true) {
 		this.strokes.pop();
-	}
+	} 
 	
 	this.ctx.clearRect(0,0,this.width, this.height);
 	this.drawing = true;
 	this.replaying = true;
 	this.strokes.forEach(function(stroke){
 
-		this.lastX = stroke.fromX;
-		this.lastY = stroke.fromY;
-		this.color = stroke.color;
+		var drawStroke = (function(stroke){
+			
 
-		var fakeEvt = {
-			offsetX: stroke.toX,
-			offsetY: stroke.toY
+			return function(){
+				
+				this.lastX = stroke.fromX;
+				this.lastY = stroke.fromY;
+				this.color = stroke.color;
+
+				var fakeEvt = {
+					offsetX: stroke.toX,
+					offsetY: stroke.toY
+				}
+
+				this.draw(fakeEvt, stroke.size, stroke.spot);
+			}.bind(this);
+			
+			// this.draw.call(this, fakeEvt, stroke.size, stroke.spot);
+
+		}.bind(this))(stroke);
+		
+
+
+			
+		
+		if (replay) {
+			playback.push(drawStroke)
+		} else {
+			drawStroke();
 		}
-
-		this.draw.call(this, fakeEvt, stroke.size, stroke.spot);
+		
 
 	},this);
-	
+
+	if (replay) {
+		
+		playback.unshift(function(){
+			this.drawing = true;
+			this.replaying = true;
+		}.bind(this));
+		playback.push(function(){
+			this.drawing = false;
+			this.replaying = false;
+		}.bind(this))
+
+		console.log('trying to playback')
+
+		util.sequential(playback, 66);
+	};
+
 	this.drawing = false;
 	this.replaying = false;
 };
@@ -182,8 +221,11 @@ Painter.prototype.save = function(options) {
 Painter.prototype.draw = function(evt, size, spot) {
 
 	if (!this.drawing) {
+		// this.debug('nuhuh')
 		return;
-	};
+	} else {
+		// this.debug('ok')
+	}
 
 
 
@@ -249,3 +291,4 @@ Painter.prototype.debug = function( /* ... */ ) {
 
 var painter = new Painter();
 window.p = painter;
+window.u = util;
