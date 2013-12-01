@@ -21,6 +21,7 @@ var Painter = function Painter (options){
 	this.canvas = main.querySelector('canvas');
 	main.querySelector('#reset').addEventListener('click',this.reset.bind(this));
 	main.querySelector('#setbg').addEventListener('click',this.setBackgroundColor.bind(this));
+	main.querySelector('#play').addEventListener('click',this.undo.bind(this,true));
 
 	this.debug('starting to insert cols');
 
@@ -148,7 +149,7 @@ Painter.prototype.undo = function undo (replay){
 
 		console.log('trying to playback')
 
-		util.sequential(playback, 66);
+		util.sequential(playback, 8);
 	};
 
 	this.drawing = false;
