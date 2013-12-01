@@ -6,6 +6,22 @@ var uniqId = (function() {
 	}
 })();
 
+var rgbToHex = function(){
+	
+	var args = [].slice.call(arguments);
+	var toString = Number.prototype.toString;
+
+	var toHex = function(num){
+		
+		var hexed = toString.call(parseInt(num,10), 16);
+		hexed = hexed.length === 1 ? '0' + hexed : hexed; // zero pad length one numbers
+		return hexed;
+	}
+	
+	return args.map(toHex).join('');
+};
+
+
 // Helper function to correctly set up the prototype chain, for subclasses.
 // Similar to `goog.inherits`, but uses a hash of prototype properties and
 // class properties to be extended.
@@ -71,5 +87,6 @@ var toDom = function toDom(str) {
 module.exports = {
 	extend: extend,
 	toDom: toDom,
-	uniqId: uniqId
+	uniqId: uniqId,
+	rgbToHex: rgbToHex
 };

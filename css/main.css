@@ -6,7 +6,7 @@
 }
 
 h1 {
-	font-size: 22px;	
+	font-size: 22px;
 	margin: 0;
 }
 
@@ -26,10 +26,27 @@ h1 {
 	margin-left: 8px;
 }
 
+.holder {
+	position: relative;
+	width: 12px;
+	display: inline-block;
+	height: 12px;
+}
+
 .color {
 	height: 12px;
 	width: 12px;
 	display: inline-block;
+	cursor: pointer;
+}
+
+.color:hover {
+	width: 24px;
+	height: 24px;
+	position: absolute;
+	left: -6px;
+	top: -6px;
+	z-index: 2;
 }
 
 #topbar {

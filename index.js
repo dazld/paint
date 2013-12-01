@@ -16,32 +16,57 @@ var Painter = function Painter (options){
 	this.sidebar = main.querySelector('aside');
 	this.canvas = main.querySelector('canvas');
 	this.ctx = this.canvas.getContext('2d');
-
-	
-	document.body.appendChild(main);
-		
 	
 	this.debug('starting to insert cols');
+	var holder = document.createElement('span');
+	holder.classList.add('holder');
+	
 	
 	this.colors.forEach(function(color){
 		var col = document.createElement('div');
+		var container = holder.cloneNode();
 		col.classList.add('color');
 		col.style.backgroundColor = color.color;
-		this.sidebar.appendChild(col);
+		container.appendChild(col);
+		this.sidebar.appendChild(container);
 	},this);
 
-	this.debug('end to insert cols');
+	this.sidebar.addEventListener('click',this.chooseColor.bind(this),false);
+	
 
+	this.debug('end insert');
+
+	document.body.appendChild(main);
+
+};
+
+Painter.prototype.chooseColor = function(evt) {
+	console.log(evt);
+	// normalize clicks that drop through to the holders @TODO figure out if this is an inline problem..dimensions wrong?
+	var target = evt.target;
+	if (evt.target.className.indexOf('holder') > -1) {
+		target = evt.target.querySelector('.color');
+	};
+
+	var rgb = target.style.backgroundColor.match(/[0-9]+/gi);
+	var hex = util.rgbToHex.apply(null, rgb);
+
+	console.log(rgb,hex);
+
+
+
+
+};
+
+Painter.prototype.draw = function(props) {
+	
 };
 
 Painter.prototype.debug = function( /* ... */ ) {
 	var evtTimeMs = Date.now() - this.startTime;
 	var args = [].slice.call(arguments);
 	args.unshift("[" + (evtTimeMs/1000).toFixed(3) + "s] - ");
-	
-
 	return console.log.apply(console, args);
-
 };
 
 
